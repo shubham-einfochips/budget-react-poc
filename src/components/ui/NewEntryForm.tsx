@@ -1,25 +1,51 @@
-import { Col, Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import ButtonSaveCancel from './ButtonSaveCancel';
+import EntryForm from './EntryForm';
 
-const NewEntryForm = () => {
+interface IProps {
+  addEntry: (description: string, value: number, expense: boolean) => void;
+  setIsOpenModal?: (value: boolean) => void;
+  description: string;
+  value: any;
+  isIncome: boolean;
+  setDescription: (value: string) => void;
+  setValue: (value: any) => void;
+  setIsIncome: (value: boolean) => void;
+}
+const NewEntryForm = ({
+  addEntry,
+  setIsOpenModal = () => {},
+  description,
+  value,
+  isIncome,
+  setDescription,
+  setValue,
+  setIsIncome,
+}: IProps) => {
+  const clearValue = () => {
+    setDescription('');
+    setValue('');
+  };
+
   return (
     <>
       <Form>
-        <Row>
-          <Col md={6} className='mb-3'>
-            <Form.Group controlId='formDescription'>
-              <Form.Label>Description</Form.Label>
-              <Form.Control type='text' placeholder='Enter description' />
-            </Form.Group>
-          </Col>
-          <Col md={3} className='mb-3'>
-            <Form.Group controlId='formDescriptionValue'>
-              <Form.Label>Value</Form.Label>
-              <Form.Control type='text' placeholder='Enter Value' />
-            </Form.Group>
-          </Col>
-        </Row>
-        <ButtonSaveCancel />
+        <EntryForm
+          description={description}
+          value={value}
+          isIncome={isIncome}
+          setDescription={setDescription}
+          setValue={setValue}
+          setIsIncome={setIsIncome}
+        />
+        <ButtonSaveCancel
+          addEntry={addEntry}
+          description={description}
+          value={value}
+          clearValue={clearValue}
+          expense={isIncome}
+          setIsOpenModal={setIsOpenModal}
+        />
       </Form>
     </>
   );

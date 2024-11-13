@@ -1,16 +1,27 @@
 import { Card, Col, Row } from 'react-bootstrap';
 import DisplayBalance from './DisplayBalance';
-
-const DisplayBalances = () => {
+interface IProps {
+  totalIncome: any;
+  totalExpense: any;
+}
+const DisplayBalances = ({ totalIncome, totalExpense }: IProps) => {
   return (
     <>
       <Card body className='mt-4 mb-4'>
         <Row>
           <Col>
-            <DisplayBalance title='INCOME' value='2,900.50' color='success' />
+            <DisplayBalance
+              title='INCOME'
+              value={totalIncome}
+              color='success'
+            />
           </Col>
           <Col>
-            <DisplayBalance title='EXPENSE' value='2,900.50' color='danger' />
+            <DisplayBalance
+              title='EXPENSE'
+              value={totalExpense}
+              color='danger'
+            />
           </Col>
         </Row>
       </Card>
